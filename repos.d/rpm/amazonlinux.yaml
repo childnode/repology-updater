@@ -41,3 +41,31 @@
     - desc: Amazon Linux 2
       url: https://aws.amazon.com/amazon-linux-2/
   groups: [ all, production, rpm, amazon ]
+
+- name: amazon_2023
+  type: repository
+  desc: Amazon Linux 2023
+  statsgroup: Amazon
+  family: fedora
+  ruleset: [fedora, rpm, amazon]
+  minpackages: 2000
+  sources:
+    - name: [ x86_64, aarch64 ]
+      fetcher:
+        class: RepodataSqliteFetcher
+        url: 'https://cdn.amazonlinux.com/al2023/core/mirrors/latest/{source}/mirror.list'
+      parser:
+        class: RepodataSqliteParser
+        #vertags: amzn  # XXX: not supported in the parser
+      subrepo: '{source}'
+    - name: amazonlinux-source
+      fetcher:
+        class: RepodataSqliteFetcher
+        url: https://cdn.amazonlinux.com/al2023/core/mirrors/latest/SRPMS/mirror.list
+      parser:
+        class: RepodataSqliteParser
+        #vertags: amzn  # XXX: not supported in the parser
+  repolinks:
+    - desc: Amazon Linux 2023
+      url: https://docs.aws.amazon.com/linux
+  groups: [ all, production, rpm, amazon ]
